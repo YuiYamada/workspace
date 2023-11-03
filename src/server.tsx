@@ -1,12 +1,13 @@
 import { Application, Router, RouterContext } from "https://deno.land/x/oak@v6.5.0/mod.ts";
 import React from 'https://dev.jspm.io/react';
-import ReactDOMServer from 'https://dev.jspm.io/react-dom/server';
+import { renderToString } from "https://esm.sh/preact-render-to-string@5.2.5";
 
 import App from './App.tsx';
 
 const app = new Application();
 const router = new Router();
 
+// log
 app.addEventListener("listen", ({ hostname, port, secure }) => {
   console.log(
     `Listening on: ${secure ? "https://" : "http://"}${hostname ??
@@ -18,7 +19,8 @@ app.addEventListener("error", (evt) => {
   console.log(evt.error);
 });
 
-const resHtml = ReactDOMServer.renderToString(
+//React要素をHTMLへ変換
+const page = (
 	<html>
 		<head>
 			<title>app-doc-maker</title>
@@ -27,7 +29,9 @@ const resHtml = ReactDOMServer.renderToString(
 			<App />
 		</body>
 	</html>
-);
+)
+
+const resHtml = renderToString(page);
 
 router.get('/app-doc-maker', (ctx: RouterContext) => {
 	ctx.response.body = resHtml;
@@ -36,4 +40,5 @@ router.get('/app-doc-maker', (ctx: RouterContext) => {
 app.use(router.routes());
 app.use(router.allowedMethods());
 
+// TODO: condigからとる
 await app.listen({ port: 8080 });
