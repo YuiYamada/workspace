@@ -6,10 +6,14 @@ const config: DenonConfig = {
     start: {
       cmd: "deno run src/server.tsx",
       desc: "run my server.tsx file",
-			allow: ["net"],
+			allow: ["net", "read"],
 			unstable: true,
 			watch: false,
     },
+		bundle: {
+			cmd: "deno bundle ./src/public/main.tsx ./src/public/main.js",
+			watch: false,
+		}
   },
 };
 
