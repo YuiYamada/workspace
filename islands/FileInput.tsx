@@ -1,13 +1,13 @@
 import { JSX } from "preact";
 import { useEffect, useRef } from "preact/hooks";
-import SimpleDropzone from "simple-dropzone";
+import { SimpleDropzone } from "simple-dropzone";
 
 export default function FileInput(_props: JSX.HTMLAttributes) {
   const inputRef = useRef(null);
   const dropzoneRef = useRef(null);
 
   const upload = (file: File) => {
-    console.log("@@@test");
+    console.dir(file);
   };
 
   useEffect(() => {
