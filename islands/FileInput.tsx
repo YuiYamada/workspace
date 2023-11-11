@@ -2,7 +2,7 @@ import { JSX } from "preact";
 import { useEffect, useRef } from "preact/hooks";
 import { SimpleDropzone } from "simple-dropzone";
 
-export default function FileInput(_props: JSX.HTMLAttributes) {
+export default function FileInput(): JSX.Element {
   const inputRef = useRef(null);
   const dropzoneRef = useRef(null);
 

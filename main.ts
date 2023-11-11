@@ -8,6 +8,8 @@ import "$std/dotenv/load.ts";
 
 import { start } from "$fresh/server.ts";
 import manifest from "./fresh.gen.ts";
-import config from "./fresh.config.ts";
 
-await start(manifest, config);
+// Denoの環境変数を取得
+const PORT = Deno.env.get("PORT");
+// start
+await start(manifest, { port: PORT ? Number(PORT) : undefined });
